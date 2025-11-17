@@ -263,4 +263,436 @@
       opacity: 0;
       animation: floatUp 6s cubic-bezier(0.33, 0.0, 0.35, 1) forwards;
       box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      wh
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    @keyframes floatUp {
+      0% { transform: translate3d(0, 40px, 0); opacity: 0; }
+      8% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translate3d(40px, -110px, 0); opacity: 0; }
+    }
+
+    /* 身體掃描 */
+    .body-wrapper {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .body-figure {
+      position: relative;
+      width: 120px;
+      height: 260px;
+      border-radius: 100px;
+      background: radial-gradient(circle at 30% 0, rgba(255,255,255,0.18), transparent 55%),
+                  radial-gradient(circle at 50% 70%, rgba(255,220,150,0.14), transparent 70%),
+                  rgba(255,255,255,0.02);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
+    .body-spot {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff7e6, #ffb36b);
+      box-shadow: 0 0 0 0 rgba(255,179,107,0.8);
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: box-shadow 0.25s ease-out, transform 0.25s ease-out, filter 0.25s ease-out;
+    }
+    .body-spot:hover {
+      transform: translate(-50%, -50%) scale(1.06);
+      filter: brightness(1.08);
+    }
+    .body-spot.active {
+      animation: pulse 1.6s ease-out infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,179,107,0.9); }
+      100% { box-shadow: 0 0 0 16px rgba(255,179,107,0); }
+    }
+    .body-text {
+      font-size: 14px;
+      color: var(--text-sub);
+      min-height: 3.2em;
+    }
+
+    /* 疼痛 slider */
+    .range-row {
+      margin-top: 12px;
+    }
+    .range-row input[type="range"] {
+      width: 100%;
+      -webkit-appearance: none;
+      background: transparent;
+    }
+    .range-row input[type="range"]::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7bd7ff, #ffd27a, #ff8a7a);
+    }
+    .range-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(0,0,0,0.4);
+      margin-top: -6px;
+      cursor: pointer;
+    }
+    .range-row input[type="range"]::-moz-range-track {
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7bd7ff, #ffd27a, #ff8a7a);
+    }
+    .range-row input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .pain-intensity-label {
+      font-size: 24px;
+      margin-top: 6px;
+    }
+    .pain-zone {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-sub);
+      min-height: 3.2em;
+    }
+
+    footer {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 12px 20px 32px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav-inner">
+    <div class="logo">MINDFULNESS</div>
+    <div class="nav-tabs">
+      <button class="nav-tab" data-target="#parenting">正念親子</button>
+      <button class="nav-tab" data-target="#awareness">正念覺察</button>
+      <button class="nav-tab" data-target="#body">身體掃描</button>
+      <button class="nav-tab" data-target="#pain">正念疼痛</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 正念親子 -->
+  <section id="parenting">
+    <div class="section-label">THEME 01</div>
+    <h1>正念親子</h1>
+    <p class="section-desc">
+      給正在平衡工作與家庭的你。這裡不是教你做完美父母，而是先看見，自己與孩子此刻的狀態。
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">互動｜此刻的親子情緒</div>
+        <div class="card-body">
+          <div class="primary-text" id="parenting-main-text">
+            選一個最接近你現在的狀態。
+          </div>
+          <div class="secondary-text" id="parenting-sub-text">
+            不需要是正確答案，只是一個暫時的標記。
+          </div>
+          <div class="pill-row" style="margin-top:18px;">
+            <div class="pill" data-mood="calm">平靜</div>
+            <div class="pill" data-mood="tired">很累</div>
+            <div class="pill" data-mood="angry">生氣</div>
+            <div class="pill" data-mood="anxious">緊張</div>
+            <div class="pill" data-mood="neutral">說不清</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">引導</div>
+        <div class="card-body">
+          <p>
+            有情緒的時候，很容易先看到「自己做得不夠好」，或「孩子怎麼又這樣」。在這個小空間裡，我們先做一件事：
+          </p>
+          <p>
+            允許這個情緒存在。然後，對自己說一句溫柔的話，例如：
+          </p>
+          <ul style="padding-left:20px; margin:10px 0 0; color:var(--text-sub); font-size:14px;">
+            <li>「今天已經很努力了。」</li>
+            <li>「我也在學，孩子也是。」</li>
+            <li>「我們可以慢一點。」</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 正念覺察 -->
+  <section id="awareness">
+    <div class="section-label">THEME 02</div>
+    <h2>正念覺察</h2>
+    <p class="section-desc">
+      覺察不是分析自己，而是單純知道：此刻，腦中正在播放什麼。讓念頭變成一顆可以飄走的小氣泡。
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">互動｜念頭氣泡</div>
+        <div class="card-body">
+          <p class="secondary-text">
+            在下面打一句「現在腦中最吵的念頭」。按下送出，它會變成一顆緩慢飄走的氣泡。
+          </p>
+          <div class="thought-input-row">
+            <input id="thought-input" class="thought-input" maxlength="24" placeholder="例如：今天晚上一定要完成報告…" />
+            <button class="btn" id="thought-send">送出</button>
+          </div>
+          <div class="thought-layer" id="thought-layer"></div>
+          <p class="secondary-text" style="margin-top:6px;">
+            這些文字不會被儲存，只是陪你看著念頭出現、停留、再離開。
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">引導</div>
+        <div class="card-body">
+          <p>
+            正念覺察的核心，不是讓腦袋變空，而是知道：「啊，原來我現在又在想這個」。就像把相機的焦點，從情節拉回到「正在想的這個人」身上。
+          </p>
+          <p>
+            當你下次發現自己又被同一個念頭捲走時，可以試著在心裡標記：
+          </p>
+          <p class="secondary-text">「喔，這是在擔心未來。」或「喔，我又在重播剛剛的對話。」</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 身體掃描 -->
+  <section id="body">
+    <div class="section-label">THEME 03</div>
+    <h2>身體掃描</h2>
+    <p class="section-desc">
+      當大腦很吵時，身體常常已經在發出訊號。透過簡單的點擊，讓注意力回到身體，看看哪個部位最想被你看見。
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">互動｜點哪裡，亮哪裡</div>
+        <div class="card-body">
+          <div class="body-wrapper">
+            <div class="body-figure">
+              <div class="body-spot" data-part="shoulder" style="top:18%; left:50%;"></div>
+              <div class="body-spot" data-part="chest" style="top:40%; left:50%;"></div>
+              <div class="body-spot" data-part="belly" style="top:60%; left:50%;"></div>
+              <div class="body-spot" data-part="hands" style="top:78%; left:30%;"></div>
+              <div class="body-spot" data-part="hands" style="top:78%; left:70%;"></div>
+            </div>
+            <div style="max-width:280px;">
+              <div class="primary-text">現在，哪個位置最有感覺？</div>
+              <div id="body-text" class="body-text">
+                點一下身體輪廓上的光點，看看那裡此刻的感覺如何。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">引導</div>
+        <div class="card-body">
+          <p>
+            身體掃描不是要你立刻放鬆，而是用好奇的角度去感受：
+          </p>
+          <ul style="padding-left:20px; margin:10px 0; color:var(--text-sub); font-size:14px;">
+            <li>這裡是緊？還是沉？還是沒有特別感覺？</li>
+            <li>感覺有沒有往某個方向移動？</li>
+            <li>如果讓它存在 10 秒，不去改變它，會怎麼樣？</li>
+          </ul>
+          <p class="secondary-text">
+            你不需要喜歡這種感覺，只要願意短暫地陪它待在這裡。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 正念疼痛 -->
+  <section id="pain">
+    <div class="section-label">THEME 04</div>
+    <h2>正念疼痛</h2>
+    <p class="section-desc">
+      這一段不是醫療建議，而是陪你練習：在疼痛裡找到一點點空間，把自己從「疼痛本身」稍微拉遠一點。
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">互動｜疼痛強度刻度</div>
+        <div class="card-body">
+          <p class="secondary-text">
+            用這個刻度，標記你現在的疼痛強度。沒有對錯，只是今天這一刻的感覺。
+          </p>
+          <div class="range-row">
+            <input id="pain-range" type="range" min="1" max="10" value="3" />
+          </div>
+          <div class="pain-intensity-label" id="pain-label">強度：3 / 10</div>
+          <div class="pain-zone" id="pain-text">
+            可能有些不舒服，但你仍然可以呼吸，也仍然可以注意其它地方。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">引導</div>
+        <div class="card-body">
+          <p>
+            正念疼痛的練習，不是要你忍耐，而是讓疼痛不再佔據 100% 的畫面。你可以：
+          </p>
+          <ul style="padding-left:20px; margin:10px 0; color:var(--text-sub); font-size:14px;">
+            <li>把注意力放在疼痛周圍，而不是只盯著中心點。</li>
+            <li>觀察疼痛是尖銳、鈍鈍的、拉扯感，還是其他形狀。</li>
+            <li>在每一次呼氣時，輕輕地對自己說：「我在這裡陪著你。」</li>
+          </ul>
+          <p class="secondary-text">
+            如果疼痛讓你難以承受，請優先尋求專業醫療協助。正念可以是陪你走路的工具，但不是取代治療的方式。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  正念線上策展示意頁面 · 可自由調整文案與設計以符合公司內部使用情境。
+</footer>
+
+<script>
+  // 導覽列捲動
+  document.querySelectorAll(".nav-tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = document.querySelector(btn.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // 正念親子情緒 pills
+  const parentingMainText = document.getElementById("parenting-main-text");
+  const parentingSubText = document.getElementById("parenting-sub-text");
+  const parentingCopy = {
+    calm: {
+      main: "此刻，你和孩子之間有一點平靜。",
+      sub: "不需要把這份平靜變成什麼，只是留意：原來現在有這樣的片刻。"
+    },
+    tired: {
+      main: "你很累，還在努力照顧很多事情。",
+      sub: "累並不代表你不夠好，只代表你正在用力。也許可以先對自己說一句「謝謝我」。"
+    },
+    angry: {
+      main: "你感到生氣，或許是因為在意。",
+      sub: "生氣的背後，通常是希望被理解。先承認這份希望正在這裡。"
+    },
+    anxious: {
+      main: "你有些緊張或擔心。",
+      sub: "試著在心裡說：「我注意到自己在擔心。」光是看見，就已經是一種照顧。"
+    },
+    neutral: {
+      main: "說不太上來是什麼情緒，也沒關係。",
+      sub: "有時候「說不清」本身就是一種狀態。你可以只是待在這裡，慢慢讓它變得清楚。"
+    }
+  };
+
+  document.querySelectorAll(".pill").forEach(pill => {
+    pill.addEventListener("click", () => {
+      document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      const mood = pill.dataset.mood;
+      const text = parentingCopy[mood];
+      parentingMainText.textContent = text.main;
+      parentingSubText.textContent = text.sub;
+    });
+  });
+
+  // 念頭氣泡
+  const thoughtInput = document.getElementById("thought-input");
+  const thoughtSend = document.getElementById("thought-send");
+  const thoughtLayer = document.getElementById("thought-layer");
+
+  function sendThought() {
+    const value = (thoughtInput.value || "").trim();
+    if (!value) return;
+    const bubble = document.createElement("div");
+    bubble.className = "thought-bubble";
+    bubble.textContent = value;
+    // 隨機起始水平位置
+    const left = 5 + Math.random() * 40;
+    bubble.style.left = left + "%";
+    thoughtLayer.appendChild(bubble);
+    thoughtInput.value = "";
+    // 動畫結束後移除
+    setTimeout(() => {
+      bubble.remove();
+    }, 6200);
+  }
+
+  thoughtSend.addEventListener("click", sendThought);
+  thoughtInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendThought();
+    }
+  });
+
+  // 身體掃描點擊
+  const bodyText = document.getElementById("body-text");
+  const bodyCopy = {
+    shoulder: "肩頸也許有重量、緊繃，或什麼都沒有。只要知道現在它是這樣，就已經足夠。",
+    chest: "胸口的起伏，可能有悶、有酸、有空空的感覺。讓它在這裡待幾口氣，不急著改變。",
+    belly: "每一次吸氣，腹部微微鼓起；每一次呼氣，慢慢回落。只是跟著這個節奏就好。",
+    hands: "注意手掌：是冰冷、溫熱，還是沒有感覺？無論如何，它們都在默默為你工作。"
+  };
+
+  document.querySelectorAll(".body-spot").forEach(spot => {
+    spot.addEventListener("click", () => {
+      document.querySelectorAll(".body-spot").forEach(s => s.classList.remove("active"));
+      spot.classList.add("active");
+      const part = spot.dataset.part;
+      bodyText.textContent = bodyCopy[part];
+    });
+  });
+
+  // 疼痛刻度
+  const painRange = document.getElementById("pain-range");
+  const painLabel = document.getElementById("pain-label");
+  const painText = document.getElementById("pain-text");
+
+  function updatePain() {
+    const v = Number(painRange.value);
+    painLabel.textContent = `強度：${v} / 10`;
+    let text;
+    if (v <= 3) {
+      text = "可能有些不舒服，但你仍然可以呼吸，也仍然可以注意其它地方。";
+    } else if (v <= 6) {
+      text = "疼痛存在，也佔去了不少空間。試著在每次呼氣時，把注意力擴散到身體其他區域。";
+    } else {
+      text = "現在真的很不容易。你不需要一個人撐住這個強度，允許自己尋求支援，同時用呼吸陪著這份疼痛。";
+    }
+    painText.textContent = text;
+  }
+  painRange.addEventListener("input", updatePain);
+  updatePain();
+</script>
+</body>
+</html>
