@@ -2,16 +2,16 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>正念疼痛</title>
+  <title>身體掃描</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* 人形主體容器 */
-    .pain-figure {
-      margin: 30px auto;
+    /* 人形主體 */
+    .scan-figure {
+      margin: 20px auto;
       width: 160px;
-      height: 340px;
+      height: 360px;
       position: relative;
     }
 
@@ -19,125 +19,56 @@
     .head {
       width: 70px;
       height: 70px;
-      background: #ffa533;
+      background: #2e3248;
       border-radius: 50%;
       margin: 0 auto;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.4);
     }
 
-    /* 身體主幹 */
+    /* 身體 */
     .body {
-      width: 70px;
-      height: 140px;
-      background: #ffa533;
-      border-radius: 25px;
+      width: 80px;
+      height: 150px;
+      background: #2e3248;
+      border-radius: 30px;
       margin: 0 auto;
       position: relative;
+      box-shadow: 0 20px 55px rgba(0,0,0,0.45);
     }
 
     /* 手臂 */
     .arm {
-      width: 26px;
-      height: 110px;
-      background: #ffa533;
+      width: 28px;
+      height: 120px;
+      background: #2e3248;
       border-radius: 20px;
       position: absolute;
       top: 80px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
     }
-    .arm.left { left: -36px; transform: rotate(12deg); }
-    .arm.right { right: -36px; transform: rotate(-12deg); }
+
+    .arm.left  { left: -40px; transform: rotate(12deg); }
+    .arm.right { right: -40px; transform: rotate(-12deg); }
 
     /* 腿 */
     .leg {
-      width: 30px;
-      height: 130px;
-      background: #ffa533;
+      width: 32px;
+      height: 140px;
+      background: #2e3248;
       border-radius: 20px;
       position: absolute;
       top: 180px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.45);
     }
-    .leg.left { left: 22px; }
-    .leg.right { right: 22px; }
 
-    /* 疼痛光點 */
-    .pain-spot {
+    .leg.left  { left: 26px; }
+    .leg.right { right: 26px; }
+
+    /* 發光點（掃描點） */
+    .scan-spot {
       position: absolute;
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      background: radial-gradient(circle, #ffe7cf, #ff9d4b);
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 16px rgba(255,180,90,0.7);
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .pain-spot:hover {
-      transform: translate(-50%, -50%) scale(1.15);
-    }
-  </style>
-</head>
-
-<body>
-  <div class="main">
-    <h1>正念疼痛</h1>
-
-    <nav>
-      <a href="index.html">返回入口</a>
-      <a href="parenting.html">正念親子</a>
-      <a href="awareness.html">正念覺察</a>
-      <a href="body.html">身體掃描</a>
-    </nav>
-
-    <p>點選不舒服的部位，帶著覺察陪伴它，不需要立刻改變它。</p>
-
-    <div class="card">
-
-      <div class="pain-figure">
-
-        <!-- 人形結構 -->
-        <div class="head"></div>
-
-        <div class="body">
-          <div class="arm left"></div>
-          <div class="arm right"></div>
-          <div class="leg left"></div>
-          <div class="leg right"></div>
-
-          <!-- 疼痛點 -->
-          <div class="pain-spot" data-area="head"    style="top: 10%; left: 50%;"></div>
-          <div class="pain-spot" data-area="shoulder-left"  style="top: 32%; left: 15%;"></div>
-          <div class="pain-spot" data-area="shoulder-right" style="top: 32%; left: 85%;"></div>
-          <div class="pain-spot" data-area="stomach" style="top: 55%; left: 50%;"></div>
-          <div class="pain-spot" data-area="leg-left"  style="top: 82%; left: 35%;"></div>
-          <div class="pain-spot" data-area="leg-right" style="top: 82%; left: 65%;"></div>
-        </div>
-
-      </div>
-
-      <p id="pain-text" style="margin-top: 20px; color: rgba(255,255,255,0.88);">
-        選一個有感的位置開始。
-      </p>
-    </div>
-  </div>
-
-  <script>
-    const painText = document.getElementById("pain-text");
-
-    const painMap = {
-      head: "頭部：觀察緊、脹、沉、跳動。讓呼吸陪著它，不急著改善。",
-      "shoulder-left": "左肩：注意壓力、僵硬、刺痛。你在看見它，不是對抗它。",
-      "shoulder-right": "右肩：感受重量、酸感或拉扯。讓它知道，你在。",
-      stomach: "腹部：覺察悶、漲、翻攪或緊繃，不需要改變，只是陪伴。",
-      "leg-left": "左腿：承受你一天的重量，只是給它一些空間和注意。",
-      "leg-right": "右腿：疲累、酸軟或沉重，都只是此刻的狀態。",
-    };
-
-    document.querySelectorAll(".pain-spot").forEach(spot => {
-      spot.addEventListener("click", () => {
-        painText.textContent = painMap[spot.dataset.area];
-      });
-    });
-  </script>
-
-</body>
-</html>
+      background: radial-gradient(circle, #ffe7cf, #ffbb72);
+      transfo
