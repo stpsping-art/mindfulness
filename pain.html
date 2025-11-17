@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>正念疼痛</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main">
+    <h1>正念疼痛</h1>
+    <nav>
+      <a href="index.html">返回入口</a>
+      <a href="parenting.html">正念親子</a>
+      <a href="awareness.html">正念覺察</a>
+      <a href="body.html">身體掃描</a>
+    </nav>
+
+    <p>這不是醫療建議，而是一個讓你在疼痛裡找到一點空間的練習。</p>
+
+    <div class="card">
+      <p>用刻度標記此刻的疼痛強度，沒有對錯，只是現在這一刻。</p>
+      <input type="range" id="pain-range" min="1" max="10" value="3" />
+      <div id="pain-label" class="pain-label"></div>
+      <p id="pain-text" style="font-size:15px;color:rgba(255,255,255,0.8);margin-top:6px;"></p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:10px;">
+        如果疼痛讓你難以承受，請優先尋求醫療專業協助。正念可以是陪你走路的工具，但不是取代治療的方式。
+      </p>
+    </div>
+  </div>
+
+  <audio id="bgm" src="bgm_pain.mp3" loop preload="auto"></audio>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    document.body.addEventListener("click", () => { bgm.play(); }, { once: true });
+
+    const range = document.getElementById("pain-range");
+    const label = document.getElementById("pain-label");
+    const text = document.getElementById("pain-text");
+
+    function updatePain() {
+      const v = Number(range.value);
+      label.textContent = `強度：${v} / 10`;
+      let t;
+      if (v <= 3) {
+        t = "可能有些不舒服，但你仍然可以呼吸，也仍然可以注意身體其他地方。";
+      } else if (v <= 6) {
+        t = "疼痛佔去了不少空間。每一次呼氣時，試著讓視野擴大一點點，不只停留在疼痛上。";
+      } else {
+        t = "現在真的不容易。你不需要一個人撐住這個強度，允許自己尋求支援，同時用呼吸陪著這份疼痛。";
+      }
+      text.textContent = t;
+    }
+
+    range.addEventListener("input", updatePain);
+    updatePain();
+  </script>
+</body>
+</html>
