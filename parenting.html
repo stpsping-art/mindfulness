@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>正念親子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main">
+    <h1>正念親子</h1>
+    <nav>
+      <a href="index.html">返回入口</a>
+      <a href="awareness.html">正念覺察</a>
+      <a href="body.html">身體掃描</a>
+      <a href="pain.html">正念疼痛</a>
+    </nav>
+
+    <p>這一頁，給正在平衡工作與家庭的你。先看見自己的狀態，再談如何陪伴孩子。</p>
+
+    <div class="card">
+      <p>選一個最接近你現在的親子情緒：</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+        <button class="btn" data-mood="平靜">平靜</button>
+        <button class="btn" data-mood="很累">很累</button>
+        <button class="btn" data-mood="生氣">生氣</button>
+        <button class="btn" data-mood="緊張">緊張</button>
+        <button class="btn" data-mood="說不清">說不清</button>
+      </div>
+      <p id="parenting-result" style="margin-top:16px;font-size:16px;"></p>
+      <p id="parenting-extra" style="font-size:14px;color:rgba(255,255,255,0.7);"></p>
+    </div>
+  </div>
+
+  <audio id="bgm" src="bgm_parenting.mp3" loop preload="auto"></audio>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    document.body.addEventListener("click", () => { bgm.play(); }, { once: true });
+
+    const copy = {
+      "平靜": [
+        "此刻，你和孩子之間有一點平靜。",
+        "不需要把這份平靜變成什麼，只是知道：原來現在有這樣的片刻。"
+      ],
+      "很累": [
+        "你很累，還在照顧很多事情。",
+        "累代表你正在用力，不代表你不夠好。也許可以先對自己說一句「辛苦了」。"
+      ],
+      "生氣": [
+        "你感到生氣，可能因為你很在意。",
+        "生氣背後通常藏著希望。先承認「我真的很在意」是可以的。"
+      ],
+      "緊張": [
+        "你有些緊張或擔心。",
+        "試著在心裡標記：「我注意到自己在擔心。」光是看見，就已經是一種照顧。"
+      ],
+      "說不清": [
+        "你說不太上來是什麼情緒。",
+        "有時候「說不清」本身就是一種狀態。你可以只是待在這裡，慢慢讓它變得清楚。"
+      ]
+    };
+
+    document.querySelectorAll(".btn[data-mood]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const mood = btn.dataset.mood;
+        const [main, sub] = copy[mood];
+        document.getElementById("parenting-result").textContent = main;
+        document.getElementById("parenting-extra").textContent = sub;
+      });
+    });
+  </script>
+</body>
+</html>
