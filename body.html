@@ -7,72 +7,71 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* 人形外框 */
     .figure {
-      width: 200px;
-      height: 420px;
+      width: 220px;
+      height: 480px;
       margin: 20px auto;
       position: relative;
     }
 
     /* 頭 */
     .head {
-      width: 70px;
-      height: 70px;
+      width: 75px;
+      height: 75px;
       background: #2e3248;
       border-radius: 50%;
       margin: 0 auto;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
     }
 
-    /* 身體主體 */
+    /* 身體 */
     .torso {
-      width: 90px;
-      height: 170px;
+      width: 95px;
+      height: 190px;
       background: #2e3248;
-      border-radius: 40px;
+      border-radius: 45px;
       margin: 0 auto;
+      margin-top: 8px;
       position: relative;
-      top: 10px;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
     }
 
     /* 手臂 */
     .arm {
-      width: 30px;
-      height: 130px;
-      background: #2e3248;
-      border-radius: 20px;
-      position: absolute;
-      top: 110px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
-    }
-
-    .arm.left  { left: -45px; transform: rotate(10deg); }
-    .arm.right { right: -45px; transform: rotate(-10deg); }
-
-    /* 腿 */
-    .leg {
-      width: 34px;
+      width: 32px;
       height: 150px;
       background: #2e3248;
       border-radius: 20px;
       position: absolute;
-      top: 250px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+      top: 110px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
     }
 
-    .leg.left  { left: 38px; }
-    .leg.right { right: 38px; }
+    .arm.left { left: -50px; }
+    .arm.right { right: -50px; }
 
-    /* 發亮疼痛點 */
+    /* 腿 */
+    .leg {
+      width: 38px;
+      height: 170px;
+      background: #2e3248;
+      border-radius: 20px;
+      position: absolute;
+      top: 290px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .leg.left { left: 40px; }
+    .leg.right { right: 40px; }
+
+    /* 疼痛點 */
     .pain-spot {
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffe7cf, #ffbb72);
-      box-shadow: 0 0 20px rgba(255,180,90,0.75);
+      box-shadow: 0 0 20px rgba(255, 180, 90, 0.75);
       transform: translate(-50%, -50%);
       cursor: pointer;
       transition: 0.2s;
@@ -85,81 +84,85 @@
 </head>
 
 <body>
-  <div class="main">
-    <h1>正念疼痛覺察</h1>
+<div class="main">
+  <h1>正念疼痛覺察</h1>
 
-    <nav>
-      <a href="index.html">返回入口</a>
-      <a href="parenting.html">正念親子</a>
-      <a href="awareness.html">正念覺察</a>
-      <a href="body.html">身體掃描</a>
-    </nav>
+  <nav>
+    <a href="index.html">返回入口</a>
+    <a href="parenting.html">正念親子</a>
+    <a href="awareness.html">正念覺察</a>
+    <a href="body.html">身體掃描</a>
+  </nav>
 
-    <p>
-      點選身體上出現疼痛的位置，觀察那個部位現在的感覺，不需要急著讓它消失。
-    </p>
+  <p>點選身體上出現疼痛的位置，感受那個部位現在的狀態，不急著讓它消失。</p>
 
-    <div class="card">
-      <div class="figure">
+  <div class="card">
+    <div class="figure">
 
-        <!-- 頭 -->
-        <div class="head"></div>
+      <!-- 身體部件 -->
+      <div class="head"></div>
+      <div class="torso"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
 
-        <!-- 軀幹 -->
-        <div class="torso"></div>
+      <!-- ===== 疼痛點（重新排列） ===== -->
 
-        <!-- 手臂 -->
-        <div class="arm left"></div>
-        <div class="arm right"></div>
+      <!-- 頭：中央 -->
+      <div class="pain-spot" data-part="head" style="top: 12%; left: 50%;"></div>
 
-        <!-- 腿（位置已調整，不會重疊） -->
-        <div class="leg left"></div>
-        <div class="leg right"></div>
+      <!-- 軀幹（3 點均匀排列） -->
+      <div class="pain-spot" data-part="upper"  style="top: 32%; left: 50%;"></div>
+      <div class="pain-spot" data-part="middle" style="top: 44%; left: 50%;"></div>
+      <div class="pain-spot" data-part="lower"  style="top: 56%; left: 50%;"></div>
 
-        <!-- ===== 疼痛點配置 ===== -->
+      <!-- 四肢中段（真正落在手臂中央 & 腿中央） -->
 
-        <!-- 頭部 -->
-        <div class="pain-spot" data-part="head" style="top: 10%; left: 50%;"></div>
+      <!-- 左手 -->
+      <div class="pain-spot" data-part="arm-left"
+           style="top: 47%; left: 8%;"></div>
 
-        <!-- 軀幹三點（均勻分布） -->
-        <div class="pain-spot" data-part="upper" style="top: 32%; left: 50%;"></div>
-        <div class="pain-spot" data-part="middle" style="top: 47%; left: 50%;"></div>
-        <div class="pain-spot" data-part="lower" style="top: 62%; left: 50%;"></div>
+      <!-- 右手 -->
+      <div class="pain-spot" data-part="arm-right"
+           style="top: 47%; left: 92%;"></div>
 
-        <!-- 四肢中間（左右各 2 點） -->
-        <div class="pain-spot" data-part="arm-left"  style="top: 48%; left: 14%;"></div>
-        <div class="pain-spot" data-part="arm-right" style="top: 48%; left: 86%;"></div>
+      <!-- 左腿 -->
+      <div class="pain-spot" data-part="leg-left"
+           style="top: 82%; left: 32%;"></div>
 
-        <div class="pain-spot" data-part="leg-left"  style="top: 83%; left: 34%;"></div>
-        <div class="pain-spot" data-part="leg-right" style="top: 83%; left: 66%;"></div>
-      </div>
+      <!-- 右腿 -->
+      <div class="pain-spot" data-part="leg-right"
+           style="top: 82%; left: 68%;"></div>
 
-      <p id="pain-text" style="margin-top: 16px; color: rgba(255,255,255,0.88);">
-        選擇一個位置開始，觀察疼痛的形狀、大小、溫度或跳動感。
-      </p>
     </div>
+
+    <p id="pain-text" style="margin-top: 16px; color: rgba(255,255,255,0.88);">
+      選擇一個位置開始，觀察疼痛的形狀、大小、溫度或跳動感。
+    </p>
   </div>
+</div>
 
-  <script>
-    const painText = document.getElementById("pain-text");
+<script>
+  const painText = document.getElementById("pain-text");
 
-    const painMap = {
-      head: "注意頭部：脹、麻、跳動、緊繃，讓它自然存在，不需要排斥。",
-      upper: "注意胸口或上腹：悶、酸、緊、熱，感受當下的細微變化。",
-      middle: "注意中軀幹：可能有牽扯、痠軟或壓迫感，試著只是觀察。",
-      lower: "注意下腹或腰部：沉、痛、酸，讓呼吸輕輕流經那裡。",
-      "arm-left": "注意左手：痠、麻、脹，看看是否有溫度或節奏變化。",
-      "arm-right": "注意右手：沉、緊、刺痛或放射感，溫柔地陪伴它。",
-      "leg-left": "注意左腿：緊繃、抽痛、沉重，不需急著放鬆。",
-      "leg-right": "注意右腿：跳動、壓力、痠軟，允許它以當下的方式存在。"
-    };
+  const painMap = {
+    head: "注意頭部：脹、跳、壓力或緊繃，讓它自然存在。",
+    upper: "胸口上方：悶、緊、壓力，感受呼吸輕觸的變化。",
+    middle: "軀幹中央：痠、累、緊繃或牽扯，只是看見它。",
+    lower: "軀幹下方：沉、微痛、僵硬，允許當下的樣子。",
+    "arm-left": "左手：痠麻、沉重、脹感，留心變化不必修正。",
+    "arm-right": "右手：刺痛、緊縮、跳動，觀察起伏即可。",
+    "leg-left": "左腿：沉、麻、緊繃或重量感，感受支撐性。",
+    "leg-right": "右腿：痠痛、抽動、刺痛，讓注意停留片刻。"
+  };
 
-    document.querySelectorAll(".pain-spot").forEach(spot => {
-      spot.addEventListener("click", () => {
-        painText.textContent = painMap[spot.dataset.part];
-      });
+  document.querySelectorAll(".pain-spot").forEach(spot => {
+    spot.addEventListener("click", () => {
+      painText.textContent = painMap[spot.dataset.part];
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
