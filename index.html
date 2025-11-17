@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>正念互動策展</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- 動畫 & 互動套件 -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+</head>
+<body>
+  <!-- p5.js 粒子畫布 -->
+  <div id="particle-canvas"></div>
+
+  <!-- Intro -->
+  <section id="intro" class="full-section">
+    <div class="center">
+      <div class="fade" id="intro-text-1">讓畫面跟上你的速度。</div>
+      <div class="fade" id="intro-text-2">停留一下，進入這段練習。</div>
+    </div>
+  </section>
+
+  <!-- Breathing -->
+  <section id="breathing" class="full-section">
+    <div id="breathing-ball"></div>
+    <p class="fade line" id="breath-text-1">跟著光的節奏，不必一致。</p>
+    <p class="fade line" id="breath-text-2">吸。</p>
+    <p class="fade line" id="breath-text-3">吐。</p>
+    <p class="hint fade" id="breath-hint">你可以點觸光球，讓節奏更慢。</p>
+  </section>
+
+  <!-- Emotion -->
+  <section id="emotion" class="full-section">
+    <p class="fade line" id="emo-text-1">你的情緒，不需要被分析。</p>
+    <p class="fade line" id="emo-text-2">只要注意它的強度。</p>
+    <p class="fade line" id="emo-text-3">強或弱，都可以。</p>
+  </section>
+
+  <!-- Body Awareness -->
+  <section id="body" class="full-section">
+    <div id="body-glow"></div>
+    <p class="fade line" id="body-text-1">注意你把注意力放在哪裡。</p>
+    <p class="fade line" id="body-text-2">如果它停在肩頸，停就好。</p>
+    <p class="fade line" id="body-text-3">如果它落在呼吸，也很好。</p>
+  </section>
+
+  <!-- Reflection -->
+  <section id="reflection" class="full-section">
+    <p class="line">一句話描述你的現在即可。</p>
+    <input id="reflection-input"
+           autocomplete="off"
+           placeholder="限 12 個字以內"
+           maxlength="12" />
+  </section>
+
+  <!-- Outro -->
+  <section id="outro" class="full-section">
+    <p class="fade line" id="outro-text-1">保留這一點空間。</p>
+    <p class="fade line" id="outro-text-2">你可以隨時回來。</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

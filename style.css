@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0e0e0f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    sans-serif;
+  color: rgba(255, 255, 255, 0.82);
+  overflow-x: hidden;
+}
+
+.full-section {
+  min-height: 100vh;
+  padding: 72px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+}
+
+.center {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.line {
+  margin: 12px 0;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.hint {
+  margin-top: 28px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#breathing-ball {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 220, 180, 0.7),
+    rgba(255, 200, 160, 0.18),
+    transparent
+  );
+  filter: blur(2px);
+  margin-bottom: 32px;
+}
+
+#body-glow {
+  position: absolute;
+  bottom: 18%;
+  width: 70%;
+  max-width: 520px;
+  height: 120px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 220, 180, 0.33),
+    transparent 70%
+  );
+  opacity: 0.4;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+#reflection-input {
+  padding: 12px 14px;
+  width: 80%;
+  max-width: 420px;
+  background: #1b1b1c;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 16px;
+  outline: none;
+}
+
+#reflection-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* p5 canvas */
+canvas {
+  position: fixed !important;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .line {
+    font-size: 18px;
+  }
+  #breathing-ball {
+    width: 150px;
+    height: 150px;
+  }
+}
