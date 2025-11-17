@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>身體掃描</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main">
+    <h1>身體掃描</h1>
+    <nav>
+      <a href="index.html">返回入口</a>
+      <a href="parenting.html">正念親子</a>
+      <a href="awareness.html">正念覺察</a>
+      <a href="pain.html">正念疼痛</a>
+    </nav>
+
+    <p>點一下身體輪廓上的光點，留意那個部位此刻的感覺，不需要立刻放鬆。</p>
+
+    <div class="card">
+      <div class="body-figure">
+        <div class="body-spot" data-part="head" style="top:16%;left:50%;"></div>
+        <div class="body-spot" data-part="chest" style="top:38%;left:50%;"></div>
+        <div class="body-spot" data-part="belly" style="top:58%;left:50%;"></div>
+        <div class="body-spot" data-part="legs" style="top:78%;left:50%;"></div>
+      </div>
+      <p id="body-text" style="margin-top:12px;font-size:15px;color:rgba(255,255,255,0.8);">
+        從頭到腳，選一個最有感覺的位置開始。
+      </p>
+    </div>
+  </div>
+
+  <audio id="bgm" src="bgm_body.mp3" loop preload="auto"></audio>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    document.body.addEventListener("click", () => { bgm.play(); }, { once: true });
+
+    const text = document.getElementById("body-text");
+    const copy = {
+      head: "頭部可能有脹、緊、沉，或什麼都沒有。你只需要知道：現在它是這樣。",
+      chest: "胸口的起伏，可能有悶、有酸、有空空的感覺。讓它在這裡待幾口氣，不急著改變。",
+      belly: "腹部隨呼吸微微鼓起、回落。只是跟著這個節奏就好，不需要特別用力。",
+      legs: "腿部或腳底，承載了你今天走過的一切。如果願意，可以對它們說一句謝謝。"
+    };
+
+    document.querySelectorAll(".body-spot").forEach(s => {
+      s.addEventListener("click", () => {
+        const part = s.dataset.part;
+        text.textContent = copy[part];
+      });
+    });
+  </script>
+</body>
+</html>
