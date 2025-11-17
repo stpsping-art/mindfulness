@@ -7,145 +7,150 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* 人形主體 */
-    .scan-figure {
+    .figure {
+      width: 220px;
+      height: 480px;
       margin: 20px auto;
-      width: 160px;
-      height: 360px;
       position: relative;
     }
 
     /* 頭 */
     .head {
-      width: 70px;
-      height: 70px;
+      width: 75px;
+      height: 75px;
       background: #2e3248;
       border-radius: 50%;
       margin: 0 auto;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.45);
     }
 
     /* 身體 */
-    .body {
-      width: 80px;
-      height: 150px;
+    .torso {
+      width: 95px;
+      height: 190px;
       background: #2e3248;
-      border-radius: 30px;
+      border-radius: 45px;
       margin: 0 auto;
+      margin-top: 8px;
       position: relative;
-      box-shadow: 0 20px 55px rgba(0,0,0,0.45);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
     }
 
     /* 手臂 */
     .arm {
-      width: 28px;
-      height: 120px;
+      width: 32px;
+      height: 150px;
       background: #2e3248;
       border-radius: 20px;
       position: absolute;
-      top: 80px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+      top: 110px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
     }
-
-    .arm.left  { left: -40px; transform: rotate(12deg); }
-    .arm.right { right: -40px; transform: rotate(-12deg); }
+    .arm.left { left: -50px; }
+    .arm.right { right: -50px; }
 
     /* 腿 */
     .leg {
-      width: 32px;
-      height: 140px;
+      width: 38px;
+      height: 170px;
       background: #2e3248;
       border-radius: 20px;
       position: absolute;
-      top: 180px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+      top: 290px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
     }
+    .leg.left  { left: 40px; }
+    .leg.right { right: 40px; }
 
-    .leg.left  { left: 26px; }
-    .leg.right { right: 26px; }
-
-    /* 發光點（掃描點） */
+    /* 光點 */
     .scan-spot {
       position: absolute;
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffe7cf, #ffbb72);
+      box-shadow: 0 0 20px rgba(255,180,90,0.75);
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 16px rgba(255,180,90,0.7);
       cursor: pointer;
       transition: 0.2s;
     }
-
     .scan-spot:hover {
-      transform: translate(-50%, -50%) scale(1.15);
+      transform: translate(-50%, -50%) scale(1.18);
     }
   </style>
 </head>
 
 <body>
-  <div class="main">
-    <h1>身體掃描</h1>
+<div class="main">
+  <h1>身體掃描</h1>
 
-    <nav>
-      <a href="index.html">返回入口</a>
-      <a href="parenting.html">正念親子</a>
-      <a href="awareness.html">正念覺察</a>
-      <a href="pain.html">正念疼痛</a>
-    </nav>
+  <nav>
+    <a href="index.html">返回入口</a>
+    <a href="parenting.html">正念親子</a>
+    <a href="awareness.html">正念覺察</a>
+    <a href="pain.html">正念疼痛</a>
+  </nav>
 
-    <p>
-      點一下身體上的光點，注意那個部位當下的感覺，不需要立即放鬆。
-    </p>
+  <p>點選身體上的光點，停留片刻，感受此刻的身體訊息。</p>
 
-    <div class="card">
-      <div class="scan-figure">
+  <div class="card">
+    <div class="figure">
 
-        <div class="head"></div>
+      <!-- 身體部件 -->
+      <div class="head"></div>
+      <div class="torso"></div>
 
-        <div class="body">
-          <div class="arm left"></div>
-          <div class="arm right"></div>
-          <div class="leg left"></div>
-          <div class="leg right"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
 
-          <!-- 扫描光点 -->
-          <div class="scan-spot" data-part="head" style="top: 10%; left: 50%;"></div>
-          <div class="scan-spot" data-part="chest" style="top: 35%; left: 50%;"></div>
-          <div class="scan-spot" data-part="belly" style="top: 55%; left: 50%;"></div>
-          <div class="scan-spot" data-part="leg" style="top: 85%; left: 50%;"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
 
-        </div>
+      <!-- ===== 身體掃描的光點（依圖修正位置） ===== -->
 
-      </div>
+      <!-- 頭 -->
+      <div class="scan-spot" data-part="head" style="top: 12%; left: 50%;"></div>
 
-      <p id="scan-text" style="margin-top: 16px; color: rgba(255,255,255,0.88);">
-        從頭到腳，選一個最有感的位置開始。
-      </p>
+      <!-- 軀幹三點 -->
+      <div class="scan-spot" data-part="upper"  style="top: 32%; left: 50%;"></div>
+      <div class="scan-spot" data-part="middle" style="top: 44%; left: 50%;"></div>
+      <div class="scan-spot" data-part="lower"  style="top: 56%; left: 50%;"></div>
+
+      <!-- 四肢光點（位置已完全對準四肢） -->
+      <div class="scan-spot" data-part="arm-left"  style="top: 47%; left: 8%;"></div>
+      <div class="scan-spot" data-part="arm-right" style="top: 47%; left: 92%;"></div>
+
+      <div class="scan-spot" data-part="leg-left"  style="top: 82%; left: 32%;"></div>
+      <div class="scan-spot" data-part="leg-right" style="top: 82%; left: 68%;"></div>
 
     </div>
+
+    <p id="scan-text" style="margin-top:16px; color:rgba(255,255,255,0.88);">
+      選擇一個位置開始，注意呼吸如何輕輕碰觸那個部位。
+    </p>
   </div>
+</div>
 
-  <script>
-    const scanText = document.getElementById("scan-text");
+<script>
+  const scanText = document.getElementById("scan-text");
 
-    const scanMap = {
-      head:
-        "注意頭部：緊、脹、沉、跳動，不需要改變，只是看見它現在的樣子。",
-      chest:
-        "注意胸口：呼吸的起伏、悶、酸、擴散感。輕輕感受即可。",
-      belly:
-        "注意腹部：呼吸帶來的升起與落下，不控制、不規劃，只是觀察。",
-      leg:
-        "注意腿部：沉、酸、累，或是一種支撐感。感受它承載了什麼。"
-    };
+  const scanMap = {
+    head: "注意頭部：輕、緊、沉、跳動或空空的感覺，讓注意停留片刻。",
+    upper: "注意胸口上方：觀察起伏、擴張、緊縮或任何細微變化。",
+    middle:"注意胸腔中央或上腹：感受呼吸在其中的流動。",
+    lower: "注意下腹：升起、落下、壓力、溫度或存在感。",
+    "arm-left": "注意左手：溫度、重量、能量移動或細微的觸感。",
+    "arm-right": "注意右手：麻、暖、涼、跳動或靜止感，都可以。",
+    "leg-left": "注意左腿：沉、支撐、緊、放鬆或能量流動。",
+    "leg-right": "注意右腿：重量、穩定、壓力、舒適度，都自然呈現。"
+  };
 
-    document.querySelectorAll(".scan-spot").forEach(spot => {
-      spot.addEventListener("click", () => {
-        scanText.textContent = scanMap[spot.dataset.part];
-      });
+  document.querySelectorAll(".scan-spot").forEach(spot => {
+    spot.addEventListener("click", () => {
+      scanText.textContent = scanMap[spot.dataset.part];
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
