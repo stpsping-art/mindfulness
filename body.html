@@ -2,16 +2,16 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>身體掃描</title>
+  <title>正念疼痛覺察</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* 人形主體 */
-    .scan-figure {
+    /* 人形外框 */
+    .figure {
+      width: 200px;
+      height: 420px;
       margin: 20px auto;
-      width: 160px;
-      height: 360px;
       position: relative;
     }
 
@@ -22,127 +22,141 @@
       background: #2e3248;
       border-radius: 50%;
       margin: 0 auto;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.45);
     }
 
-    /* 身體 */
-    .body {
-      width: 80px;
-      height: 150px;
+    /* 身體主體 */
+    .torso {
+      width: 90px;
+      height: 170px;
       background: #2e3248;
-      border-radius: 30px;
+      border-radius: 40px;
       margin: 0 auto;
       position: relative;
-      box-shadow: 0 20px 55px rgba(0,0,0,0.45);
+      top: 10px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
     }
 
     /* 手臂 */
     .arm {
-      width: 28px;
-      height: 120px;
+      width: 30px;
+      height: 130px;
       background: #2e3248;
       border-radius: 20px;
       position: absolute;
-      top: 80px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+      top: 110px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
     }
 
-    .arm.left  { left: -40px; transform: rotate(12deg); }
-    .arm.right { right: -40px; transform: rotate(-12deg); }
+    .arm.left  { left: -45px; transform: rotate(10deg); }
+    .arm.right { right: -45px; transform: rotate(-10deg); }
 
     /* 腿 */
     .leg {
-      width: 32px;
-      height: 140px;
+      width: 34px;
+      height: 150px;
       background: #2e3248;
       border-radius: 20px;
       position: absolute;
-      top: 180px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+      top: 250px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
     }
 
-    .leg.left  { left: 26px; }
-    .leg.right { right: 26px; }
+    .leg.left  { left: 38px; }
+    .leg.right { right: 38px; }
 
-    /* 發光點（掃描點） */
-    .scan-spot {
+    /* 發亮疼痛點 */
+    .pain-spot {
       position: absolute;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffe7cf, #ffbb72);
+      box-shadow: 0 0 20px rgba(255,180,90,0.75);
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 16px rgba(255,180,90,0.7);
       cursor: pointer;
       transition: 0.2s;
     }
 
-    .scan-spot:hover {
-      transform: translate(-50%, -50%) scale(1.15);
+    .pain-spot:hover {
+      transform: translate(-50%, -50%) scale(1.18);
     }
   </style>
 </head>
 
 <body>
   <div class="main">
-    <h1>身體掃描</h1>
+    <h1>正念疼痛覺察</h1>
 
     <nav>
       <a href="index.html">返回入口</a>
       <a href="parenting.html">正念親子</a>
       <a href="awareness.html">正念覺察</a>
-      <a href="pain.html">正念疼痛</a>
+      <a href="body.html">身體掃描</a>
     </nav>
 
     <p>
-      點一下身體上的光點，注意那個部位當下的感覺，不需要立即放鬆。
+      點選身體上出現疼痛的位置，觀察那個部位現在的感覺，不需要急著讓它消失。
     </p>
 
     <div class="card">
-      <div class="scan-figure">
+      <div class="figure">
 
+        <!-- 頭 -->
         <div class="head"></div>
 
-        <div class="body">
-          <div class="arm left"></div>
-          <div class="arm right"></div>
-          <div class="leg left"></div>
-          <div class="leg right"></div>
+        <!-- 軀幹 -->
+        <div class="torso"></div>
 
-          <!-- 扫描光点 -->
-          <div class="scan-spot" data-part="head" style="top: 10%; left: 50%;"></div>
-          <div class="scan-spot" data-part="chest" style="top: 35%; left: 50%;"></div>
-          <div class="scan-spot" data-part="belly" style="top: 55%; left: 50%;"></div>
-          <div class="scan-spot" data-part="leg" style="top: 85%; left: 50%;"></div>
+        <!-- 手臂 -->
+        <div class="arm left"></div>
+        <div class="arm right"></div>
 
-        </div>
+        <!-- 腿（位置已調整，不會重疊） -->
+        <div class="leg left"></div>
+        <div class="leg right"></div>
 
+        <!-- ===== 疼痛點配置 ===== -->
+
+        <!-- 頭部 -->
+        <div class="pain-spot" data-part="head" style="top: 10%; left: 50%;"></div>
+
+        <!-- 軀幹三點（均勻分布） -->
+        <div class="pain-spot" data-part="upper" style="top: 32%; left: 50%;"></div>
+        <div class="pain-spot" data-part="middle" style="top: 47%; left: 50%;"></div>
+        <div class="pain-spot" data-part="lower" style="top: 62%; left: 50%;"></div>
+
+        <!-- 四肢中間（左右各 2 點） -->
+        <div class="pain-spot" data-part="arm-left"  style="top: 48%; left: 14%;"></div>
+        <div class="pain-spot" data-part="arm-right" style="top: 48%; left: 86%;"></div>
+
+        <div class="pain-spot" data-part="leg-left"  style="top: 83%; left: 34%;"></div>
+        <div class="pain-spot" data-part="leg-right" style="top: 83%; left: 66%;"></div>
       </div>
 
-      <p id="scan-text" style="margin-top: 16px; color: rgba(255,255,255,0.88);">
-        從頭到腳，選一個最有感的位置開始。
+      <p id="pain-text" style="margin-top: 16px; color: rgba(255,255,255,0.88);">
+        選擇一個位置開始，觀察疼痛的形狀、大小、溫度或跳動感。
       </p>
-
     </div>
   </div>
 
   <script>
-    const scanText = document.getElementById("scan-text");
+    const painText = document.getElementById("pain-text");
 
-    const scanMap = {
-      head:
-        "注意頭部：緊、脹、沉、跳動，不需要改變，只是看見它現在的樣子。",
-      chest:
-        "注意胸口：呼吸的起伏、悶、酸、擴散感。輕輕感受即可。",
-      belly:
-        "注意腹部：呼吸帶來的升起與落下，不控制、不規劃，只是觀察。",
-      leg:
-        "注意腿部：沉、酸、累，或是一種支撐感。感受它承載了什麼。"
+    const painMap = {
+      head: "注意頭部：脹、麻、跳動、緊繃，讓它自然存在，不需要排斥。",
+      upper: "注意胸口或上腹：悶、酸、緊、熱，感受當下的細微變化。",
+      middle: "注意中軀幹：可能有牽扯、痠軟或壓迫感，試著只是觀察。",
+      lower: "注意下腹或腰部：沉、痛、酸，讓呼吸輕輕流經那裡。",
+      "arm-left": "注意左手：痠、麻、脹，看看是否有溫度或節奏變化。",
+      "arm-right": "注意右手：沉、緊、刺痛或放射感，溫柔地陪伴它。",
+      "leg-left": "注意左腿：緊繃、抽痛、沉重，不需急著放鬆。",
+      "leg-right": "注意右腿：跳動、壓力、痠軟，允許它以當下的方式存在。"
     };
 
-    document.querySelectorAll(".scan-spot").forEach(spot => {
+    document.querySelectorAll(".pain-spot").forEach(spot => {
       spot.addEventListener("click", () => {
-        scanText.textContent = scanMap[spot.dataset.part];
+        painText.textContent = painMap[spot.dataset.part];
       });
     });
   </script>
