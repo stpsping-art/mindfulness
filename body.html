@@ -71,4 +71,81 @@
       height: 38px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffe7cf, #ffbb72);
-      transfo
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 16px rgba(255,180,90,0.7);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .scan-spot:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <h1>身體掃描</h1>
+
+    <nav>
+      <a href="index.html">返回入口</a>
+      <a href="parenting.html">正念親子</a>
+      <a href="awareness.html">正念覺察</a>
+      <a href="pain.html">正念疼痛</a>
+    </nav>
+
+    <p>
+      點一下身體上的光點，注意那個部位當下的感覺，不需要立即放鬆。
+    </p>
+
+    <div class="card">
+      <div class="scan-figure">
+
+        <div class="head"></div>
+
+        <div class="body">
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+          <!-- 扫描光点 -->
+          <div class="scan-spot" data-part="head" style="top: 10%; left: 50%;"></div>
+          <div class="scan-spot" data-part="chest" style="top: 35%; left: 50%;"></div>
+          <div class="scan-spot" data-part="belly" style="top: 55%; left: 50%;"></div>
+          <div class="scan-spot" data-part="leg" style="top: 85%; left: 50%;"></div>
+
+        </div>
+
+      </div>
+
+      <p id="scan-text" style="margin-top: 16px; color: rgba(255,255,255,0.88);">
+        從頭到腳，選一個最有感的位置開始。
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    const scanText = document.getElementById("scan-text");
+
+    const scanMap = {
+      head:
+        "注意頭部：緊、脹、沉、跳動，不需要改變，只是看見它現在的樣子。",
+      chest:
+        "注意胸口：呼吸的起伏、悶、酸、擴散感。輕輕感受即可。",
+      belly:
+        "注意腹部：呼吸帶來的升起與落下，不控制、不規劃，只是觀察。",
+      leg:
+        "注意腿部：沉、酸、累，或是一種支撐感。感受它承載了什麼。"
+    };
+
+    document.querySelectorAll(".scan-spot").forEach(spot => {
+      spot.addEventListener("click", () => {
+        scanText.textContent = scanMap[spot.dataset.part];
+      });
+    });
+  </script>
+
+</body>
+</html>
