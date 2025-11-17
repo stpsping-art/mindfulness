@@ -5,10 +5,57 @@
   <title>身體掃描</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* 人形剪影 */
+    .body-figure-new {
+      margin: 20px auto;
+      width: 140px;
+      height: 320px;
+      background: linear-gradient(180deg, #2d3148, #141421);
+      border-radius: 70px;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.65);
+    }
+
+    /* 頭部 */
+    .body-head {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #3a3f5f, #1a1c2b);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+    }
+
+    /* 發光點 */
+    .spot {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff4dd, #ffb36b);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      opacity: 0.85;
+      transition: 0.2s;
+      box-shadow: 0 0 12px rgba(255,180,100,0.6);
+    }
+
+    .spot:hover {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+  </style>
 </head>
+
 <body>
   <div class="main">
     <h1>身體掃描</h1>
+
     <nav>
       <a href="index.html">返回入口</a>
       <a href="parenting.html">正念親子</a>
@@ -16,17 +63,20 @@
       <a href="pain.html">正念疼痛</a>
     </nav>
 
-    <p>點一下身體輪廓上的光點，留意那個部位此刻的感覺，不需要立刻放鬆。</p>
+    <p>點一下身體上的發光位置，觀察那個部位此刻的狀態。</p>
 
     <div class="card">
-      <div class="body-figure">
-        <div class="body-spot" data-part="head" style="top:16%;left:50%;"></div>
-        <div class="body-spot" data-part="chest" style="top:38%;left:50%;"></div>
-        <div class="body-spot" data-part="belly" style="top:58%;left:50%;"></div>
-        <div class="body-spot" data-part="legs" style="top:78%;left:50%;"></div>
+      <div class="body-figure-new">
+        <div class="body-head"></div>
+
+        <div class="spot" data-part="head"  style="top:12%; left:50%;"></div>
+        <div class="spot" data-part="chest" style="top:40%; left:50%;"></div>
+        <div class="spot" data-part="belly" style="top:63%; left:50%;"></div>
+        <div class="spot" data-part="legs"  style="top:88%; left:50%;"></div>
       </div>
-      <p id="body-text" style="margin-top:12px;font-size:15px;color:rgba(255,255,255,0.8);">
-        從頭到腳，選一個最有感覺的位置開始。
+
+      <p id="body-text" style="margin-top:14px;font-size:16px;color:rgba(255,255,255,0.85);">
+        從上到下，選一個你現在最有感覺的位置。
       </p>
     </div>
   </div>
@@ -34,21 +84,22 @@
   <audio id="bgm" src="bgm_body.mp3" loop preload="auto"></audio>
 
   <script>
-    const bgm = document.getElementById("bgm");
-    document.body.addEventListener("click", () => { bgm.play(); }, { once: true });
+    document.body.addEventListener("click", () => {
+      document.getElementById("bgm").play();
+    }, { once: true });
 
     const text = document.getElementById("body-text");
-    const copy = {
-      head: "頭部可能有脹、緊、沉，或什麼都沒有。你只需要知道：現在它是這樣。",
-      chest: "胸口的起伏，可能有悶、有酸、有空空的感覺。讓它在這裡待幾口氣，不急著改變。",
-      belly: "腹部隨呼吸微微鼓起、回落。只是跟著這個節奏就好，不需要特別用力。",
-      legs: "腿部或腳底，承載了你今天走過的一切。如果願意，可以對它們說一句謝謝。"
+
+    const map = {
+      head:  "注意頭部：緊、脹、沉，或是很輕。不需要改變，只是看見它現在的樣子。",
+      chest: "注意胸口：起伏、酸、悶、熱，或是一種擴散感。你只需要跟它同在。",
+      belly: "注意腹部：呼吸的伸展與回縮。不控制、不規劃，只是觀察。",
+      legs: "注意腿與腳：承載著你今天走過的一切。給它們一點感謝與休息。"
     };
 
-    document.querySelectorAll(".body-spot").forEach(s => {
+    document.querySelectorAll(".spot").forEach(s => {
       s.addEventListener("click", () => {
-        const part = s.dataset.part;
-        text.textContent = copy[part];
+        text.textContent = map[s.dataset.part];
       });
     });
   </script>
