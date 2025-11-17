@@ -2,106 +2,142 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>身體掃描</title>
+  <title>正念疼痛</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* 人形剪影 */
-    .body-figure-new {
-      margin: 20px auto;
-      width: 140px;
-      height: 320px;
-      background: linear-gradient(180deg, #2d3148, #141421);
-      border-radius: 70px;
+    /* 人形主體容器 */
+    .pain-figure {
+      margin: 30px auto;
+      width: 160px;
+      height: 340px;
       position: relative;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.65);
     }
 
-    /* 頭部 */
-    .body-head {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 80px;
+    /* 頭 */
+    .head {
+      width: 70px;
+      height: 70px;
+      background: #ffa533;
       border-radius: 50%;
-      background: linear-gradient(180deg, #3a3f5f, #1a1c2b);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+      margin: 0 auto;
     }
 
-    /* 發光點 */
-    .spot {
+    /* 身體主幹 */
+    .body {
+      width: 70px;
+      height: 140px;
+      background: #ffa533;
+      border-radius: 25px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* 手臂 */
+    .arm {
+      width: 26px;
+      height: 110px;
+      background: #ffa533;
+      border-radius: 20px;
       position: absolute;
-      width: 34px;
-      height: 34px;
+      top: 80px;
+    }
+    .arm.left { left: -36px; transform: rotate(12deg); }
+    .arm.right { right: -36px; transform: rotate(-12deg); }
+
+    /* 腿 */
+    .leg {
+      width: 30px;
+      height: 130px;
+      background: #ffa533;
+      border-radius: 20px;
+      position: absolute;
+      top: 180px;
+    }
+    .leg.left { left: 22px; }
+    .leg.right { right: 22px; }
+
+    /* 疼痛光點 */
+    .pain-spot {
+      position: absolute;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: radial-gradient(circle, #fff4dd, #ffb36b);
+      background: radial-gradient(circle, #ffe7cf, #ff9d4b);
       transform: translate(-50%, -50%);
+      box-shadow: 0 0 16px rgba(255,180,90,0.7);
       cursor: pointer;
-      opacity: 0.85;
-      transition: 0.2s;
-      box-shadow: 0 0 12px rgba(255,180,100,0.6);
+      transition: 0.2s ease;
     }
 
-    .spot:hover {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1.12);
+    .pain-spot:hover {
+      transform: translate(-50%, -50%) scale(1.15);
     }
   </style>
 </head>
 
 <body>
   <div class="main">
-    <h1>身體掃描</h1>
+    <h1>正念疼痛</h1>
 
     <nav>
       <a href="index.html">返回入口</a>
       <a href="parenting.html">正念親子</a>
       <a href="awareness.html">正念覺察</a>
-      <a href="pain.html">正念疼痛</a>
+      <a href="body.html">身體掃描</a>
     </nav>
 
-    <p>點一下身體上的發光位置，觀察那個部位此刻的狀態。</p>
+    <p>點選不舒服的部位，帶著覺察陪伴它，不需要立刻改變它。</p>
 
     <div class="card">
-      <div class="body-figure-new">
-        <div class="body-head"></div>
 
-        <div class="spot" data-part="head"  style="top:12%; left:50%;"></div>
-        <div class="spot" data-part="chest" style="top:40%; left:50%;"></div>
-        <div class="spot" data-part="belly" style="top:63%; left:50%;"></div>
-        <div class="spot" data-part="legs"  style="top:88%; left:50%;"></div>
+      <div class="pain-figure">
+
+        <!-- 人形結構 -->
+        <div class="head"></div>
+
+        <div class="body">
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+          <!-- 疼痛點 -->
+          <div class="pain-spot" data-area="head"    style="top: 10%; left: 50%;"></div>
+          <div class="pain-spot" data-area="shoulder-left"  style="top: 32%; left: 15%;"></div>
+          <div class="pain-spot" data-area="shoulder-right" style="top: 32%; left: 85%;"></div>
+          <div class="pain-spot" data-area="stomach" style="top: 55%; left: 50%;"></div>
+          <div class="pain-spot" data-area="leg-left"  style="top: 82%; left: 35%;"></div>
+          <div class="pain-spot" data-area="leg-right" style="top: 82%; left: 65%;"></div>
+        </div>
+
       </div>
 
-      <p id="body-text" style="margin-top:14px;font-size:16px;color:rgba(255,255,255,0.85);">
-        從上到下，選一個你現在最有感覺的位置。
+      <p id="pain-text" style="margin-top: 20px; color: rgba(255,255,255,0.88);">
+        選一個有感的位置開始。
       </p>
     </div>
   </div>
 
-  <audio id="bgm" src="bgm_body.mp3" loop preload="auto"></audio>
-
   <script>
-    document.body.addEventListener("click", () => {
-      document.getElementById("bgm").play();
-    }, { once: true });
+    const painText = document.getElementById("pain-text");
 
-    const text = document.getElementById("body-text");
-
-    const map = {
-      head:  "注意頭部：緊、脹、沉，或是很輕。不需要改變，只是看見它現在的樣子。",
-      chest: "注意胸口：起伏、酸、悶、熱，或是一種擴散感。你只需要跟它同在。",
-      belly: "注意腹部：呼吸的伸展與回縮。不控制、不規劃，只是觀察。",
-      legs: "注意腿與腳：承載著你今天走過的一切。給它們一點感謝與休息。"
+    const painMap = {
+      head: "頭部：觀察緊、脹、沉、跳動。讓呼吸陪著它，不急著改善。",
+      "shoulder-left": "左肩：注意壓力、僵硬、刺痛。你在看見它，不是對抗它。",
+      "shoulder-right": "右肩：感受重量、酸感或拉扯。讓它知道，你在。",
+      stomach: "腹部：覺察悶、漲、翻攪或緊繃，不需要改變，只是陪伴。",
+      "leg-left": "左腿：承受你一天的重量，只是給它一些空間和注意。",
+      "leg-right": "右腿：疲累、酸軟或沉重，都只是此刻的狀態。",
     };
 
-    document.querySelectorAll(".spot").forEach(s => {
-      s.addEventListener("click", () => {
-        text.textContent = map[s.dataset.part];
+    document.querySelectorAll(".pain-spot").forEach(spot => {
+      spot.addEventListener("click", () => {
+        painText.textContent = painMap[spot.dataset.area];
       });
     });
   </script>
+
 </body>
 </html>
