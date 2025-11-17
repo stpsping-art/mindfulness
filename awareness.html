@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>正念覺察</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main">
+    <h1>正念覺察</h1>
+    <nav>
+      <a href="index.html">返回入口</a>
+      <a href="parenting.html">正念親子</a>
+      <a href="body.html">身體掃描</a>
+      <a href="pain.html">正念疼痛</a>
+    </nav>
+
+    <p>把現在腦中最吵的一個念頭寫下來，看它如何出現、停留、然後慢慢飄走。</p>
+
+    <div class="card">
+      <input id="thought-input" class="thought-input" maxlength="30" placeholder="例如：今天的進度一定要完成…" />
+      <button id="thought-send" class="btn">送出念頭</button>
+      <div class="thought-area" id="thought-area"></div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:8px;">
+        這些文字不會被儲存，只是陪你一起看著念頭走過畫面。
+      </p>
+    </div>
+  </div>
+
+  <audio id="bgm" src="bgm_awareness.mp3" loop preload="auto"></audio>
+
+  <script>
+    const bgm = document.getElementById("bgm");
+    document.body.addEventListener("click", () => { bgm.play(); }, { once: true });
+
+    const input = document.getElementById("thought-input");
+    const btn = document.getElementById("thought-send");
+    const area = document.getElementById("thought-area");
+
+    function sendThought() {
+      const text = (input.value || "").trim();
+      if (!text) return;
+      const bubble = document.createElement("div");
+      bubble.className = "thought-bubble";
+      bubble.textContent = text;
+      bubble.style.left = (5 + Math.random() * 40) + "%";
+      area.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 7200);
+      input.value = "";
+    }
+
+    btn.addEventListener("click", sendThought);
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendThought();
+      }
+    });
+  </script>
+</body>
+</html>
