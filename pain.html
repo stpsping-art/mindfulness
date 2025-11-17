@@ -5,10 +5,82 @@
   <title>正念疼痛</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* 橘色人形 */
+    .pain-figure {
+      margin: 20px auto;
+      width: 120px;
+      height: 260px;
+      position: relative;
+    }
+
+    /* 頭 */
+    .pain-head {
+      width: 60px;
+      height: 60px;
+      background: #ffa533;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    /* 身體 */
+    .pain-body {
+      width: 55px;
+      height: 110px;
+      background: #ffa533;
+      margin: 0 auto;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    /* 手 */
+    .arm {
+      width: 22px;
+      height: 80px;
+      background: #ffa533;
+      position: absolute;
+      top: 20px;
+      border-radius: 20px;
+    }
+    .arm.left { left: -24px; transform: rotate(10deg); }
+    .arm.right { right: -24px; transform: rotate(-10deg); }
+
+    /* 腿 */
+    .leg {
+      width: 24px;
+      height: 95px;
+      background: #ffa533;
+      position: absolute;
+      top: 110px;
+      border-radius: 20px;
+    }
+    .leg.left { left: 14px; }
+    .leg.right { right: 14px; }
+
+    /* 發光點（疼痛點） */
+    .pain-spot {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffe5c4, #ff9e4e);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 14px rgba(255,180,90,0.7);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .pain-spot:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+  </style>
 </head>
+
 <body>
   <div class="main">
     <h1>正念疼痛</h1>
+
     <nav>
       <a href="index.html">返回入口</a>
       <a href="parenting.html">正念親子</a>
@@ -16,45 +88,55 @@
       <a href="body.html">身體掃描</a>
     </nav>
 
-    <p>這不是醫療建議，而是一個讓你在疼痛裡找到一點空間的練習。</p>
+    <p>
+      點一下你此刻覺得最不舒服的地方，我們一起帶著覺察去感受它。
+    </p>
 
     <div class="card">
-      <p>用刻度標記此刻的疼痛強度，沒有對錯，只是現在這一刻。</p>
-      <input type="range" id="pain-range" min="1" max="10" value="3" />
-      <div id="pain-label" class="pain-label"></div>
-      <p id="pain-text" style="font-size:15px;color:rgba(255,255,255,0.8);margin-top:6px;"></p>
-      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:10px;">
-        如果疼痛讓你難以承受，請優先尋求醫療專業協助。正念可以是陪你走路的工具，但不是取代治療的方式。
+
+      <div class="pain-figure">
+
+        <div class="pain-head"></div>
+
+        <div class="pain-body">
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+          <!-- 疼痛點 -->
+          <div class="pain-spot" data-area="head"  style="top:15%; left:50%;"></div>
+          <div class="pain-spot" data-area="shoulder" style="top:38%; left:20%;"></div>
+          <div class="pain-spot" data-area="shoulder" style="top:38%; left:80%;"></div>
+          <div class="pain-spot" data-area="stomach" style="top:60%; left:50%;"></div>
+          <div class="pain-spot" data-area="leg" style="top:88%; left:35%;"></div>
+          <div class="pain-spot" data-area="leg" style="top:88%; left:65%;"></div>
+        </div>
+
+      </div>
+
+      <p id="pain-text" style="color:rgba(255,255,255,0.85); margin-top:20px;">
+        選一個部位開始。
       </p>
+
     </div>
   </div>
 
-  <audio id="bgm" src="bgm_pain.mp3" loop preload="auto"></audio>
-
   <script>
-    const bgm = document.getElementById("bgm");
-    document.body.addEventListener("click", () => { bgm.play(); }, { once: true });
+    const painText = document.getElementById("pain-text");
 
-    const range = document.getElementById("pain-range");
-    const label = document.getElementById("pain-label");
-    const text = document.getElementById("pain-text");
+    const painMap = {
+      head: "頭部：注意緊繃、跳動、沉重、麻木……只是觀察，不需要評價。",
+      shoulder: "肩膀：感受壓力、僵硬或刺痛，它並不是敵人，只是身體在告訴你一些事。",
+      stomach: "胃部：感到悶、脹、翻攪，試著讓呼吸陪著它，不急著讓它變好。",
+      leg: "腿部：承載你一天的重量，給它一點空間，讓它被看見。"
+    };
 
-    function updatePain() {
-      const v = Number(range.value);
-      label.textContent = `強度：${v} / 10`;
-      let t;
-      if (v <= 3) {
-        t = "可能有些不舒服，但你仍然可以呼吸，也仍然可以注意身體其他地方。";
-      } else if (v <= 6) {
-        t = "疼痛佔去了不少空間。每一次呼氣時，試著讓視野擴大一點點，不只停留在疼痛上。";
-      } else {
-        t = "現在真的不容易。你不需要一個人撐住這個強度，允許自己尋求支援，同時用呼吸陪著這份疼痛。";
-      }
-      text.textContent = t;
-    }
-
-    range.addEventListener("input", updatePain);
-    updatePain();
+    document.querySelectorAll(".pain-spot").forEach(spot => {
+      spot.addEventListener("click", () => {
+        painText.textContent = painMap[spot.dataset.area];
+      });
+    });
   </script>
 </body>
 </html>
